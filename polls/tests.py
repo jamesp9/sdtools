@@ -131,17 +131,16 @@ class QuestionIndexDetailTests(TestCase):
         response = self.client.get(reverse('polls:detail', args=(past_question.id,)))
         self.assertContains(response, past_question.question_text, status_code=200)
 
-    def test_detail_view_question_has_choices(self):
-        """
-        The detail view of a question should only show, if choices exist for it.
-        """
-        question_with_choices = create_question_with_choices(
-                question_text='Question with choices',
-                days = -5,
-                choice_list = ['choice01', 'choice02']
-        )
-        response = self.client.get(reverse('polls:detail', args=(question_with_choices.id,)))
-        print(response)
-        self.assertContains(response, question_with_choices.question_text, status_code=200)
+    #def test_detail_view_question_has_choices(self):
+    #    """
+    #    The detail view of a question should only show, if choices exist for it.
+    #    """
+    #    question_with_choices = create_question_with_choices(
+    #            question_text='Question with choices',
+    #            days = -5,
+    #            choice_list = ['choice01', 'choice02']
+    #    )
+    #    response = self.client.get(reverse('polls:detail', args=(question_with_choices.id,)))
+    #    self.assertContains(response, question_with_choices.question_text, status_code=200)
 
 

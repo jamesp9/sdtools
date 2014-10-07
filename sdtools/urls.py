@@ -9,5 +9,6 @@ urlpatterns = patterns('',
     url(r'^$', 'sdtools.views.menupage'),
     #url(r'^hcg/', include('hcg.urls', namespace='hcg')),
     url(r'^polls/', include('polls.urls', namespace='polls')),
+    url(r'^conform/', include('conform.urls', namespace='conform')),
     url(r'^admin/', include(admin.site.urls)),
 )
