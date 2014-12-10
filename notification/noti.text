@@ -1,0 +1,99 @@
+Information for Email Notification
+----------------------------------
+
+Email Information
+------------------
+Prefill some of this information based on client and notification type
+To: list of one or more recipient
+From: probably yourself, maybe on behalf of someone else
+Cc: list of one or more recipient
+Subject: <client> Notification Update - <ticket no.> <headline> - Update <update number>
+
+Global Notification Information
+------------------
+Client
+Ticket number
+Headline (short description)
+Date and Time Raised
+Requestor
+Incident Manager
+People allocated
+
+Update Information (appended for each update)
+Hot Issue and Sev1 Notifications
+------------------
+Update number
+Date and Time of update (timezone 1 and 2)
+Date and Time of next expected update (timezone 1 and 2)
+Person providing udpate
+Manager engaged: list of one or more people
+Team engaged: list of one or more people
+Textfield: contain the update information (will contain bullets points and formatting)
+
+
+PROGRAM FLOW
+============
+Form:
+	* Choose Client
+	* Choose Notification type (e.g. Sev1, Hot Issue, these will have different HTML templates)
+
+Display list of communications.
+	Click "Add Communication"
+		Enter "Global Information" into form 
+	or
+
+	Select Communication from list
+
+Display list of Updates for this Commuincation flow
+	Click "Add Update"
+
+	or
+	
+	Select "Update" to edit
+
+
+Form to choose email sender, recipient list and cc list.
+
+Preview Notification Communication
+
+	Send Email
+
+	or
+
+	Edit Communication (display list of updates again)
+
+
+Models
+======
+Comm
+=====
+Client: CharField
+Ticket number: CharField
+Headline (short description): CharField
+Requestor: CharField
+Date and Time Raised: DateTimeField
+Incident Manager: CharField
+People allocated: CharField
+Active: Boolean
+
+Update
+======
+Communication: ForeignKey(Comm)
+Update number: Integer
+Date and Time of update: DateTimeField
+Date and Time of next expected update: DateTimeField
+Person providing udpate: Charfield
+Manager engaged: Charfield
+Team engaged: Charfield
+Update Information: Textfield
+Most Recent Update: Boolean
+
+Email
+=====
+To: EmailField
+From: EmailField
+Cc: EmailField
+Subject: CharField
+
+
+

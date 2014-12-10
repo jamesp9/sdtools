@@ -1,4 +1,4 @@
-from django import forms
+#from django import forms
 from django.forms import ModelForm
 from .models import QueryOptions
 
@@ -7,5 +7,5 @@ from .models import QueryOptions
 
 class EnterDataForm(ModelForm):
     class Meta:
-        model QueryOptions
+        model = QueryOptions
         fields = ['biginteger']

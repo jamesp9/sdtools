@@ -11,5 +11,6 @@ urlpatterns = patterns('',
     url(r'^polls/', include('polls.urls', namespace='polls')),
     url(r'^workingwithforms/', include('workingwithforms.urls', namespace='workingwithforms')),
     url(r'^runaquery/', include('runaquery.urls', namespace='runaquery')),
+    url(r'^notification/', include('notification.urls', namespace='notification')),
     url(r'^admin/', include(admin.site.urls)),
 )

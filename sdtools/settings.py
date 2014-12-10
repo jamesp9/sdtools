@@ -28,7 +28,7 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -43,6 +43,8 @@ INSTALLED_APPS = (
     'polls',
     'workingwithforms',
     'hcg',
+    'runaquery',
+    'notification',
     #'uhcg',
 )
 
@@ -89,6 +91,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = '/srv/www/sdtools/static/'
 
 
 TEMPLATE_LOADERS = (
