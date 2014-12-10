@@ -11,6 +11,7 @@ def start_notification(request):
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         form = StartNotificationForm(request.POST)
+        print(request.POST)
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
@@ -30,6 +31,7 @@ def notification_information(request):
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         form = NotificationInformationForm(request.POST)
+        print(request.POST)
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
@@ -41,7 +43,9 @@ def notification_information(request):
     else:
         form = NotificationInformationForm()
 
-    return render(request, 'notification/notification_information.html', {'form': form})
+    return render(request, 'notification/notification_information.html',
+            {'form': form, 'request': request.META, 'client':
+            request.POST['client_name']})
 
 
 
