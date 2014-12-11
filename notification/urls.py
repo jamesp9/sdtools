@@ -6,4 +6,5 @@ from notification import views
 urlpatterns = patterns('',
     url(r'^start_notification/$', views.start_notification, name='start_notification'),
     url(r'^notification_information/$', views.notification_information, name='notification_information'),
+    url(r'^add_update/$', views.add_update, name='add_update'),
 )

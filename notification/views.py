@@ -1,53 +1,90 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
-from django.core.mail import send_mail
+#from django.http import HttpResponseRedirect
+#from django.core.mail import send_mail
 
-from .forms import StartNotificationForm,NotificationInformationForm
+from .forms import StartNotificationForm,NotificationInformationForm,NotiUpdateForm
 
 
-# From django site first Work With Forms example
+#def start_notification(request):
+#    # if this is a POST request we need to process the form data
+#    if request.method == 'POST':
+#        # create a form instance and populate it with data from the request:
+#        form = StartNotificationForm(request.POST)
+#        print(request.POST)
+#        # check whether it's valid:
+#        if form.is_valid():
+#            # process the data in form.cleaned_data as required
+#            # ...
+#            # redirect to a new URL:
+#            return HttpResponseRedirect('/notification/notification_information/')
+#
+#    # if a GET (or any other method) we'll create a blank form
+#    else:
+#        form = StartNotificationForm()
+#
+#    return render(request, 'notification/start_notification.html', {'form': form})
+
 def start_notification(request):
-    # if this is a POST request we need to process the form data
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = StartNotificationForm(request.POST)
-        print(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            return HttpResponseRedirect('/notification/notification_information/')
-
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = StartNotificationForm()
+    form = StartNotificationForm()
 
     return render(request, 'notification/start_notification.html', {'form': form})
 
 
-def notification_information(request):
-    # if this is a POST request we need to process the form data
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = NotificationInformationForm(request.POST)
-        print(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            return HttpResponseRedirect('/notification/notification_update/')
+#def notification_information(request):
+#    # if this is a POST request we need to process the form data
+#    if request.method == 'POST':
+#        # create a form instance and populate it with data from the request:
+#        form = NotificationInformationForm(request.POST)
+#        print(request.POST)
+#        # check whether it's valid:
+#        if form.is_valid():
+#            # process the data in form.cleaned_data as required
+#            # ...
+#            # redirect to a new URL:
+#            return HttpResponseRedirect('/notification/notification_update/')
+#
+#    # if a GET (or any other method) we'll create a blank form
+#    else:
+#        form = NotificationInformationForm()
+#
+#    return render(request, 'notification/notification_information.html',
+#            {'form': form, 'request': request.META, 'post_data': request.POST})
 
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = NotificationInformationForm()
+
+def notification_information(request):
+    client = request.GET.get('client_name', '')
+    noti_type = request.GET.get('noti_type', '')
+
+    form = NotificationInformationForm()
 
     return render(request, 'notification/notification_information.html',
-            {'form': form, 'request': request.META, 'client':
-            request.POST['client_name']})
+            {'form': form, 'client': client, 'noti_type': noti_type})
 
 
+def add_update(request):
+    client = request.GET.get('client', '')
+    noti_type = request.GET.get('noti_type', '')
+    ticket_no = request.GET.get('ticket_no', '')
+    headline = request.GET.get('headline', '')
+    requestor_name = request.GET.get('requestor_name', '')
+
+    form = NotiUpdateForm()
+
+    return render(request, 'notification/add_update.html',
+        {'form': form, 
+        'client': client,
+        'noti_type': noti_type,
+        'ticket_no': ticket_no,
+        'headline': headline,
+        'requestor_name': requestor_name,
+        })
+
+
+
+# From django site second Work With Forms example
+#def contact(request):
+#    # if this is a POST request we need to process the form data
+#    if request.method == 'POST':
 
 # From django site second Work With Forms example
 #def contact(request):

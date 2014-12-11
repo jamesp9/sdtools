@@ -19,3 +19,13 @@ class NotificationInformationForm(forms.Form):
     ticket_no = forms.CharField(max_length=100)
     headline = forms.CharField(max_length=255)
     requestor_name = forms.CharField(max_length=100)
+
+class NotiUpdateForm(forms.Form):
+    update_number = forms.IntegerField()
+    update_time = forms.DateTimeField()
+    update_person = forms.CharField(max_length=255)
+    update_text = forms.CharField(widget=forms.Textarea)
+    next_update_time = forms.DateTimeField()
+
+
+

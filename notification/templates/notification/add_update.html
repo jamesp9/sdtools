@@ -2,23 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Start Notification</title>
+    <title>Add Update</title>
 </head>
 <body>
     {{ form.non_field_errors }}
-    <h4> {{ client }} </h4>
-    <h4> {{ noti_type }} </h4>
+    {{ client }}
+    {{ noti_type }}
+    {{ ticket_no }}
+    {{ headline }}
+    {{ requestor_name }}
+
 	{% comment %}
     <form action="/notification/notification_information/" method="post">
         {% csrf_token %}
 	{% endcomment %}
 
-    <form action="/notification/add_update/" method="GET">
+    <form action="/notification/preview_email/" method="GET">
         <table>
             {{ form.as_table }}
         </table>
 		<input type="hidden" name="client" value="{{ client }}">
 		<input type="hidden" name="noti_type" value="{{ noti_type }}">
+		<input type="hidden" name="ticket_no" value="{{ ticket_no }}">
+		<input type="hidden" name="headline" value="{{ headline }}">
+		<input type="hidden" name="requestor_name" value="{{ requestor_name }}">
+
         <input type="submit" value="Submit" />
     </form>
 
