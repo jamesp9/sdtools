@@ -42,10 +42,9 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'polls',
     'workingwithforms',
-    'hcg',
+    #'hcg',
     'runaquery',
     'notification',
-    #'uhcg',
 )
 
 MIDDLEWARE_CLASSES = (

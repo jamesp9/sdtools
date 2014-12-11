@@ -80,7 +80,8 @@ def add_update(request):
         })
 
 def preview_email(request):
-    return render (request, 'notifcation/preview_email.html', request.GET)
+    client = request.GET.get('client', '')
+    return render (request, 'notification/preview_email.html', {'client': client})
 
 
 
