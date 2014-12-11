@@ -79,6 +79,9 @@ def add_update(request):
         'requestor_name': requestor_name,
         })
 
+def preview_email(request):
+    return render (request, 'notifcation/preview_email.html', request.GET)
+
 
 
 # From django site second Work With Forms example

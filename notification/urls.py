@@ -7,4 +7,5 @@ urlpatterns = patterns('',
     url(r'^start_notification/$', views.start_notification, name='start_notification'),
     url(r'^notification_information/$', views.notification_information, name='notification_information'),
     url(r'^add_update/$', views.add_update, name='add_update'),
+    url(r'^preview_email/$', views.preview_email, name='preview_email'),
 )
