@@ -1,5 +1,7 @@
 from django import forms
 
+from .models import Notification
+
 SUITE1_CLIENT_CHOICES = (
         ('client01', 'Client 01'), 
         ('client02', 'Client 02'), 
@@ -10,6 +12,14 @@ NOTIFICATION_CHOICES = (
         ('sev1', 'Severity 1'),
         ('hot_issue', 'Hot Issue'),
         )
+
+
+class NotificationForm(forms.ModelForm):
+
+    class Meta:
+        model = Notification
+        fields = ['headline']
+
 
 class StartNotificationForm(forms.Form):
     client_name = forms.ChoiceField(label='Client', choices=SUITE1_CLIENT_CHOICES)

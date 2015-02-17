@@ -1,8 +1,9 @@
-from django.shortcuts import render
-#from django.http import HttpResponseRedirect
-#from django.core.mail import send_mail
+from django.shortcuts import render, render_to_response
+# from django.http import HttpResponseRedirect
+# from django.core.mail import send_mail
 
-from .forms import StartNotificationForm,NotificationInformationForm,NotiUpdateForm
+from .models import Notification
+from .forms import NotificationForm
 
 
 #def start_notification(request):
@@ -23,6 +24,20 @@ from .forms import StartNotificationForm,NotificationInformationForm,NotiUpdateF
 #        form = StartNotificationForm()
 #
 #    return render(request, 'notification/start_notification.html', {'form': form})
+
+def notifications(request):
+    return render_to_response(
+        'notification/notifications.html', {'notifications': Notification.objects.all()})
+
+
+def notification(request, notification_id=1):
+    form = NotificationForm()
+
+    return render_to_response(
+        'notification/notification.html',
+        {'form': form})
+        # {'noitification': Notification.objects.get(id=notification_id)})
+
 
 def start_notification(request):
     form = StartNotificationForm()
@@ -57,8 +72,10 @@ def notification_information(request):
 
     form = NotificationInformationForm()
 
-    return render(request, 'notification/notification_information.html',
-            {'form': form, 'client': client, 'noti_type': noti_type})
+    return render(
+        request,
+        'notification/notification_information.html',
+        {'form': form, 'client': client, 'noti_type': noti_type})
 
 
 def add_update(request):
