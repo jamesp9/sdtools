@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Notifications</title>
+	</head>
+	<body>
+		<h1>Notifications</h1>
+		{% if notifications.count > 0 %}
+			{% for notification in notifications %}
+			<p>
+			<a href="/notification/{{ notification.id }}">
+				{{ notification }}
+			</a>
+			</p>
+			{% endfor %}
+		{% else %}
+			No notifications to display.
+		{% endif %}
+
+	</body>
+</html>
