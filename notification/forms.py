@@ -18,7 +18,7 @@ class NotificationForm(forms.ModelForm):
 
     class Meta:
         model = Notification
-        fields = ['client', 'ntype', 'headline']
+        fields = ['client', 'ntype', 'headline', 'ticket', 'raised', 'requester', ]
 
 
 class StartNotificationForm(forms.Form):

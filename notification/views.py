@@ -1,5 +1,5 @@
 from django.shortcuts import render, render_to_response
-# from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect
 # from django.core.mail import send_mail
 
 from .models import Notification
@@ -34,7 +34,8 @@ def notification(request, notification_id=1):
     if request.method == 'POST':
         form = NotificationForm(request.POST)
         if form.is_valid():
-            return HttpResponseRedirect('/done/')
+
+            return HttpResponseRedirect('/notification/detail/')
     else:
         form = NotificationForm()
 
@@ -44,10 +45,25 @@ def notification(request, notification_id=1):
         # {'noitification': Notification.objects.get(id=notification_id)})
 
 
-def start_notification(request):
-    form = StartNotificationForm()
+def new_notification(request):
+    if request.method == 'POST':
+        form = NotificationForm(request.POST)
+        if form.is_valid():
+            n = Notification()
+            n.client = form.cleaned_data['client']
+            n.ntype = form.cleaned_data['ntype']
+            n.headline = form.cleaned_data['headline']
+            n.ticket = form.cleaned_data['ticket']
+            n.raised = form.cleaned_data['raised']
+            n.requester = form.cleaned_data['requester']
+            n.save()
 
-    return render(request, 'notification/start_notification.html', {'form': form})
+            return HttpResponseRedirect('/notification/all/')
+    else:
+        form = NotificationForm()
+
+
+    return render(request, 'notification/new_notification.html', {'form': form})
 
 
 #def notification_information(request):

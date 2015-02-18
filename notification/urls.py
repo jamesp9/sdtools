@@ -6,7 +6,7 @@ from notification import views
 urlpatterns = patterns('',
     url(r'^all/$', views.notifications, name='notifications'),
     url(r'^(?P<notification_id>\d+)/$', views.notification, name='notification'),
-    #url(r'^start_notification/$', views.start_notification, name='start_notification'),
+    url(r'^new/$', views.new_notification, name='new_notification'),
     #url(r'^notification_information/$',
     #    views.notification_information, name='notification_information'),
     #url(r'^add_update/$', views.add_update, name='add_update'),

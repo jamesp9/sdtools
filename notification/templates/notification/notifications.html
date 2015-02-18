@@ -5,14 +5,41 @@
 		<title>Notifications</title>
 	</head>
 	<body>
+		<style type="text/css">
+			table,td {
+				border: 1px solid black;
+			}
+		</style>
 		<h1>Notifications</h1>
 		{% if notifications.count > 0 %}
-		{% for notification in notifications %}
-		{{ notification }}
-		{% endfor %}
+		<table>
+			<tr>
+				<th>Headline</th>
+				<th>Client</th>
+				<th>Ticket</th>
+				<th>Raised</th>
+			</tr>
+			{% for notification in notifications %}
+
+			<tr>
+				<td>
+					<a href="/notification/{{ notification.id }}">{{ notification.headline }}</a>
+				</td>
+				<td>{{ notification.client }}</td>
+				<td>{{ notification.ticket }}</td>
+				<td>{{ notification.raised }}</td>
+			</tr>
+			{% endfor %}
+		</table>
+
 		{% else %}
 		No notifications to display.
 		{% endif %}
-
+		<p>
+		<a href="/">Back</a>
+		</p>
+		<p>
+		<a href="/notification/new/">New Notification</a>
+		</p>
 	</body>
 </html>

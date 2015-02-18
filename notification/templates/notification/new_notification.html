@@ -8,7 +8,7 @@
 		{{ form.non_field_errors }}
 		<h1>Notification</h1>
 
-		<form action="/notification/" method="POST">
+		<form action="/notification/new/" method="POST">
 			{% csrf_token %}
 			<table>
 				{{ form.as_table }}
