@@ -29,9 +29,10 @@ class NotificationType(models.Model):
 
 
 class Notification(models.Model):
+    client = models.ForeignKey(Client)
     ntype = models.ForeignKey(NotificationType)
     headline = models.CharField(max_length=255)
-    client = models.ForeignKey(Client)
+    ticket = models.CharField(max_length=255)
     raised = models.DateTimeField(default=timezone.now)
     requester = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
