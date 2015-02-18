@@ -31,7 +31,12 @@ def notifications(request):
 
 
 def notification(request, notification_id=1):
-    form = NotificationForm()
+    if request.method == 'POST':
+        form = NotificationForm(request.POST)
+        if form.is_valid():
+            return HttpResponseRedirect('/done/')
+    else:
+        form = NotificationForm()
 
     return render_to_response(
         'notification/notification.html',
