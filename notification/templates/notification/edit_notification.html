@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Notifications</title>
+	</head>
+	<body>
+		{{ form.non_field_errors }}
+		<h1>Notification</h1>
+
+		<form action="/notification/" method="POST">
+			{% csrf_token %}
+			<table>
+				{{ form.as_table }}
+			</table>
+			<input type="submit" value="Submit" />
+		</form>
+	</body>
+</html>

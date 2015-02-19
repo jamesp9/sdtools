@@ -2,7 +2,7 @@ from django.shortcuts import render, render_to_response
 from django.http import HttpResponseRedirect
 # from django.core.mail import send_mail
 
-from .models import Notification
+from .models import Notification, Update
 from .forms import NotificationForm
 
 
@@ -30,7 +30,14 @@ def notifications(request):
         'notification/notifications.html', {'notifications': Notification.objects.all()})
 
 
-def notification(request, notification_id=1):
+def notification(request, notification_id):
+    return render_to_response(
+        'notification/notification.html',
+        {'notification': Notification.objects.get(id=notification_id),
+            'updates': Update.objects.filter(notification__id=notification_id)})
+
+
+def edit_notification(request, notification_id):
     if request.method == 'POST':
         form = NotificationForm(request.POST)
         if form.is_valid():
@@ -40,9 +47,8 @@ def notification(request, notification_id=1):
         form = NotificationForm()
 
     return render_to_response(
-        'notification/notification.html',
+        'notification/edit_notification.html',
         {'form': form})
-        # {'noitification': Notification.objects.get(id=notification_id)})
 
 
 def new_notification(request):

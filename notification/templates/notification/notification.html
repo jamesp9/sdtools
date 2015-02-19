@@ -5,9 +5,75 @@
 		<title>Notifications</title>
 	</head>
 	<body>
-		{{ form.non_field_errors }}
-		<h1>Notification</h1>
+		<style type="text/css">
+			table,td {
+				border: 1px solid black;
+			}
+		</style>
 
+		{% comment %}
+		{{ form.non_field_errors }}
+		{% endcomment %}
+		<h1>{{ notification.client }}</h1>
+
+		<table>
+			<tr>
+				<th>Client</th>
+				<td>{{ notification.client }}</td>
+			</tr>
+			<tr>
+				<th>Notification Type</th>
+				<td>{{ notification.ntype }}</td>
+			</tr>
+			<tr>
+				<th>Headline</th>
+				<td>{{ notification.headline }}</td>
+			</tr>
+			<tr>
+				<th>Ticket</th>
+				<td>{{ notification.ticket }}</td>
+			</tr>
+			<tr>
+				<th>Requester</th>
+				<td>{{ notification.requester }}</td>
+			</tr>
+			<tr>
+				<th>Date and Time Raised</th>
+				<td>{{ notification.raised }}</td>
+			</tr>
+
+
+			
+		</table>
+			
+		{% if updates.count > 0 %}
+
+		<table>
+			<tr>
+				<th>Update</th>
+				<th>Updated At</th>
+				<th>Next Update At</th>
+				<th>Content</th>
+			</tr>
+		{% for update in updates %}
+			<tr>
+				<td>{{ update.update_number }}</td>
+				<td>{{ update.updated_at }}</td>
+				<td>{{ update.next_update_at }}</td>
+				<td>{{ update.content }}</td>
+			</tr>
+		{% endfor %}
+		</table>
+
+		{% else %}
+
+		<p>No Updates to display</p>
+		<p>Would you like to <a href="">create</a> one ?</p>
+
+		{% endif %}
+
+
+		{% comment %}
 		<form action="/notification/" method="POST">
 			{% csrf_token %}
 			<table>
@@ -15,5 +81,8 @@
 			</table>
 			<input type="submit" value="Submit" />
 		</form>
+		{% endcomment %}
+
+		<p><a href="/notification/all/">Back to Notifications</a></p>
 	</body>
 </html>

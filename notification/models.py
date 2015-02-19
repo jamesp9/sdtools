@@ -49,4 +49,4 @@ class Update(models.Model):
     content = models.TextField(default="Put the update content here.")
 
     def __unicode__(self):
-        return self.update_number
+        return str(self.update_number)
