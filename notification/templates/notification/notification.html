@@ -44,9 +44,9 @@
 			</tr>
 
 
-			
+
 		</table>
-			
+
 		{% if updates.count > 0 %}
 
 		<table>
@@ -56,14 +56,14 @@
 				<th>Next Update At</th>
 				<th>Content</th>
 			</tr>
-		{% for update in updates %}
+			{% for update in updates %}
 			<tr>
 				<td>{{ update.update_number }}</td>
 				<td>{{ update.updated_at }}</td>
 				<td>{{ update.next_update_at }}</td>
 				<td>{{ update.content }}</td>
 			</tr>
-		{% endfor %}
+			{% endfor %}
 		</table>
 
 		{% else %}
@@ -73,14 +73,22 @@
 
 		{% endif %}
 
-		<form action="/notification/all/">
-			<input type="submit" value="Back">
-		</form>
+		<table>
+			<tr>
+				<td>
+					<form action="/notification/all/">
+						<input type="submit" value="Back">
+					</form>
+				</td>
+				<td>
+					<form action="/notification/{{ notification.id }}/add/">
+						<input type="submit" value="Add Update" />
+					</form>
+				</td>
+			</tr>
+		</table>
 
-		<form action="/notification/{{ notification.id }}/add/">
-			<input type="submit" value="Add Update" />
-		</form>
 
-		<p><a href="/notification/all/">Back to Notifications</a></p>
+
 	</body>
 </html>

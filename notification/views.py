@@ -114,12 +114,17 @@ def add_update(request, notification_id):
             return HttpResponseRedirect('/notification/' + notification_id + '/')
 
     else:
-        in_an_hour = timezone.now() + timedelta(hours=1)
-        update_number = len(Update.objects.filter(notification__id=notification_id)) + 1
+        next_update_at = timezone.now() + timedelta(hours=1)
+        number_of_updates = len(Update.objects.filter(notification__id=notification_id))
+        if number_of_updates > 0:
+            next_update_is_due = Update.objects.filter(notification__id=notification_id).get(update_number=number_of_updates).next_update_at
+            next_update_at = next_update_is_due + timedelta(hours=1)
+        update_number = number_of_updates + 1
         form = UpdateForm(initial={
             'notification': notification_id,
             'update_number': update_number,
-            'next_update_at': in_an_hour, })
+            'updated_at': next_update_is_due,
+            'next_update_at': next_update_at, })
 
         # render used instead of render_to_response as that resulted in 403 error
         # CSRF token missing or incorrect. - The view function uses RequestContext for the template, instead of Context
