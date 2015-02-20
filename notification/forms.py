@@ -14,6 +14,7 @@ class UpdateForm(forms.ModelForm):
 
     class Meta:
         model = Update
+        fields = ['updated_at', 'next_update_at', 'content', ]
 
 
 # class NotificationInformationForm(forms.Form):

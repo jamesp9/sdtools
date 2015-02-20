@@ -81,12 +81,13 @@ def new_update(request, notification_id):
 
 
 def add_update(request, notification_id):
+    number_of_updates = len(Update.objects.filter(notification__id=notification_id))
     if request.method == 'POST':
         form = UpdateForm(request.POST)
         if form.is_valid():
             u = Update()
             u.notification = Notification.objects.get(pk=notification_id)
-            u.update_number = form.cleaned_data['update_number']
+            u.update_number = number_of_updates + 1
             u.updated_at = form.cleaned_data['updated_at']
             u.next_update_at = form.cleaned_data['next_update_at']
             u.content = form.cleaned_data['content']
@@ -95,8 +96,6 @@ def add_update(request, notification_id):
             return HttpResponseRedirect('/notification/' + notification_id + '/')
 
     else:
-        number_of_updates = len(Update.objects.filter(notification__id=notification_id))
-
         if number_of_updates > 0:
             # Prefill "updated at" with the "next update" time from previous Update
             updated_at = Update.objects.filter(notification__id=notification_id).get(update_number=number_of_updates).next_update_at
