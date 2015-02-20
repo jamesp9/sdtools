@@ -2,19 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add Update</title>
+    <title>New Update</title>
 </head>
 <body>
     {{ form.non_field_errors }}
 
-	<form action="/notification/{{ notification }}/add/" method="POST">
+	<form action="/notification/{{ notification }}/new/" method="POST">
         {% csrf_token %}
 
         <table>
             {{ form.as_table }}
         </table>
 
-        <input type="submit" value="Add Update" />
+        <input type="submit" value="Create New Update" />
     </form>
 
 </body>

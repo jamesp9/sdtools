@@ -1,20 +1,18 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/stylesheet.css' %}">
 		<title>Notifications</title>
 	</head>
 	<body>
-		<style type="text/css">
-			table,td {
-				border: 1px solid black;
-			}
-		</style>
 		<h1>Notifications</h1>
 		{% if notifications.count > 0 %}
 		<table>
 			<tr>
-				<th>Headline</th>
+				<th class="b3">Headline</th>
 				<th>Client</th>
 				<th>Ticket</th>
 				<th>Raised</th>

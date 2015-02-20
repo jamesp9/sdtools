@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Notification
+from .models import Notification, Update
 
 SUITE1_CLIENT_CHOICES = (
         ('client01', 'Client 01'), 
@@ -21,6 +21,12 @@ class NotificationForm(forms.ModelForm):
         fields = ['client', 'ntype', 'headline', 'ticket', 'raised', 'requester', ]
 
 
+class UpdateForm(forms.ModelForm):
+
+    class Meta:
+        model = Update
+
+
 class StartNotificationForm(forms.Form):
     client_name = forms.ChoiceField(label='Client', choices=SUITE1_CLIENT_CHOICES)
     noti_type = forms.ChoiceField(label='Notification', choices=NOTIFICATION_CHOICES)
@@ -30,12 +36,9 @@ class NotificationInformationForm(forms.Form):
     headline = forms.CharField(max_length=255)
     requestor_name = forms.CharField(max_length=100)
 
-class NotiUpdateForm(forms.Form):
-    update_number = forms.IntegerField()
-    update_time = forms.DateTimeField()
-    update_person = forms.CharField(max_length=255)
-    update_text = forms.CharField(widget=forms.Textarea)
-    next_update_time = forms.DateTimeField()
-
-
-
+# class NotiUpdateForm(forms.Form):
+#     update_number = forms.IntegerField()
+#     update_time = forms.DateTimeField()
+#     update_person = forms.CharField(max_length=255)
+#     update_text = forms.CharField(widget=forms.Textarea)
+#     next_update_time = forms.DateTimeField()

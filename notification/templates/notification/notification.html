@@ -1,7 +1,10 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/stylesheet.css' %}">
 		<title>Notifications</title>
 	</head>
 	<body>
@@ -11,9 +14,7 @@
 			}
 		</style>
 
-		{% comment %}
 		{{ form.non_field_errors }}
-		{% endcomment %}
 		<h1>{{ notification.client }}</h1>
 
 		<table>
@@ -68,20 +69,17 @@
 		{% else %}
 
 		<p>No Updates to display</p>
-		<p>Would you like to <a href="">create</a> one ?</p>
+		<p>Would you like to <a href="/notification/{{ notification.id }}/new/">create</a> one ?</p>
 
 		{% endif %}
 
-
-		{% comment %}
-		<form action="/notification/" method="POST">
-			{% csrf_token %}
-			<table>
-				{{ form.as_table }}
-			</table>
-			<input type="submit" value="Submit" />
+		<form action="/notification/all/">
+			<input type="submit" value="Back">
 		</form>
-		{% endcomment %}
+
+		<form action="/notification/{{ notification.id }}/add/">
+			<input type="submit" value="Add Update" />
+		</form>
 
 		<p><a href="/notification/all/">Back to Notifications</a></p>
 	</body>

@@ -1,9 +1,12 @@
+from datetime import timedelta
+
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponseRedirect
+from django.utils import timezone
 # from django.core.mail import send_mail
 
 from .models import Notification, Update
-from .forms import NotificationForm
+from .forms import NotificationForm, UpdateForm
 
 
 #def start_notification(request):
@@ -68,64 +71,65 @@ def new_notification(request):
     else:
         form = NotificationForm()
 
-
     return render(request, 'notification/new_notification.html', {'form': form})
 
 
-#def notification_information(request):
-#    # if this is a POST request we need to process the form data
-#    if request.method == 'POST':
-#        # create a form instance and populate it with data from the request:
-#        form = NotificationInformationForm(request.POST)
-#        print(request.POST)
-#        # check whether it's valid:
-#        if form.is_valid():
-#            # process the data in form.cleaned_data as required
-#            # ...
-#            # redirect to a new URL:
-#            return HttpResponseRedirect('/notification/notification_update/')
-#
-#    # if a GET (or any other method) we'll create a blank form
-#    else:
-#        form = NotificationInformationForm()
-#
-#    return render(request, 'notification/notification_information.html',
-#            {'form': form, 'request': request.META, 'post_data': request.POST})
+def new_update(request, notification_id):
+    if request.method == 'POST':
+        form = UpdateForm(request.POST)
+        if form.is_valid():
+            u = Update()
+            u.notification = Notification.objects.get(pk=notification_id)
+            u.update_number = 1
+            u.updated_at = form.cleaned_data['updated_at']
+            u.next_update_at = form.cleaned_data['next_update_at']
+            u.content = form.cleaned_data['content']
+            u.save()
+
+            return HttpResponseRedirect('/notification/' + notification_id + '/')
+
+    else:
+        in_an_hour = timezone.now() + timedelta(hours=1)
+        form = UpdateForm(initial={
+            'notification': notification_id,
+            'next_update_at': in_an_hour, })
+
+        # render used instead of render_to_response as that resulted in 403 error
+        # CSRF token missing or incorrect. - The view function uses RequestContext for the template, instead of Context
+        return render(request, 'notification/new_update.html', {'form': form, 'notification': notification_id, })
 
 
-def notification_information(request):
-    client = request.GET.get('client_name', '')
-    noti_type = request.GET.get('noti_type', '')
+def add_update(request, notification_id):
+    if request.method == 'POST':
+        form = UpdateForm(request.POST)
+        if form.is_valid():
+            u = Update()
+            u.notification = Notification.objects.get(pk=notification_id)
+            u.update_number = form.cleaned_data['update_number']
+            u.updated_at = form.cleaned_data['updated_at']
+            u.next_update_at = form.cleaned_data['next_update_at']
+            u.content = form.cleaned_data['content']
+            u.save()
 
-    form = NotificationInformationForm()
+            return HttpResponseRedirect('/notification/' + notification_id + '/')
 
-    return render(
-        request,
-        'notification/notification_information.html',
-        {'form': form, 'client': client, 'noti_type': noti_type})
+    else:
+        in_an_hour = timezone.now() + timedelta(hours=1)
+        update_number = len(Update.objects.filter(notification__id=notification_id)) + 1
+        form = UpdateForm(initial={
+            'notification': notification_id,
+            'update_number': update_number,
+            'next_update_at': in_an_hour, })
+
+        # render used instead of render_to_response as that resulted in 403 error
+        # CSRF token missing or incorrect. - The view function uses RequestContext for the template, instead of Context
+        return render(request, 'notification/add_update.html', {'form': form, 'notification': notification_id, })
 
 
-def add_update(request):
-    client = request.GET.get('client', '')
-    noti_type = request.GET.get('noti_type', '')
-    ticket_no = request.GET.get('ticket_no', '')
-    headline = request.GET.get('headline', '')
-    requestor_name = request.GET.get('requestor_name', '')
-
-    form = NotiUpdateForm()
-
-    return render(request, 'notification/add_update.html',
-        {'form': form, 
-        'client': client,
-        'noti_type': noti_type,
-        'ticket_no': ticket_no,
-        'headline': headline,
-        'requestor_name': requestor_name,
-        })
 
 def preview_email(request):
     client = request.GET.get('client', '')
-    return render (request, 'notification/preview_email.html', {'client': client})
+    return render(request, 'notification/preview_email.html', {'client': client})
 
 
 
