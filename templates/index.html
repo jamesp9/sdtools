@@ -1,16 +1,11 @@
-{% load staticfiles %}
+{% extends "base.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<title>SD Tools</title>
-		<link rel="stylesheet" type="text/css" href="{% static 'css/stylesheet.css' %}">
-	</head>
-	<body>
-		<h1>SD Tools</h1>
-		<p>
-		<a href="/notification/all/">Notifications</a>
-		</p>
-	</body>
-</html>
+
+{% block title %}SD Tools{% endblock title %}
+
+{% block content %}
+<h1>SD Tools</h1>
+<p>
+<a href="/notification/all/">Notifications</a>
+</p>
+{% endblock content %}

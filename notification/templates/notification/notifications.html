@@ -1,43 +1,38 @@
-{% load staticfiles %}
+{% extends "base.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<link rel="stylesheet" type="text/css" href="{% static 'css/stylesheet.css' %}">
-		<title>Notifications</title>
-	</head>
-	<body>
-		<h1>Notifications</h1>
-		{% if notifications.count > 0 %}
-		<table>
-			<tr>
-				<th class="b3">Headline</th>
-				<th>Client</th>
-				<th>Ticket</th>
-				<th>Raised</th>
-			</tr>
-			{% for notification in notifications %}
+{% block title %}Notifications{% endblock title %}
 
-			<tr>
-				<td>
-					<a href="/notification/{{ notification.id }}">{{ notification.headline }}</a>
-				</td>
-				<td>{{ notification.client }}</td>
-				<td>{{ notification.ticket }}</td>
-				<td>{{ notification.raised }}</td>
-			</tr>
-			{% endfor %}
-		</table>
+{% block content %}
 
-		{% else %}
-		No notifications to display.
-		{% endif %}
-		<p>
-		<a href="/">Back to SD Tools</a>
-		</p>
-		<p>
-		<a href="/notification/new/">New Notification</a>
-		</p>
-	</body>
-</html>
+<h1>Notifications</h1>
+{% if notifications.count > 0 %}
+<table>
+	<tr>
+		<th class="b3">Headline</th>
+		<th>Client</th>
+		<th>Ticket</th>
+		<th>Raised</th>
+	</tr>
+	{% for notification in notifications %}
+
+	<tr>
+		<td>
+			<a href="/notification/{{ notification.id }}">{{ notification.headline }}</a>
+		</td>
+		<td>{{ notification.client }}</td>
+		<td>{{ notification.ticket }}</td>
+		<td>{{ notification.raised }}</td>
+	</tr>
+	{% endfor %}
+</table>
+
+{% else %}
+No notifications to display.
+{% endif %}
+<p>
+<a href="/">Back to SD Tools</a>
+</p>
+<p>
+<a href="/notification/new/">New Notification</a>
+</p>
+{% endblock content %}

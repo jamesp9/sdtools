@@ -1,94 +1,86 @@
-{% load staticfiles %}
+{% extends "base.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<link rel="stylesheet" type="text/css" href="{% static 'css/stylesheet.css' %}">
-		<title>Notifications</title>
-	</head>
-	<body>
-		<style type="text/css">
-			table,td {
-				border: 1px solid black;
-			}
-		</style>
+{% block title %}Notification{% endblock title %}
 
-		{{ form.non_field_errors }}
-		<h1>{{ notification.client }}</h1>
+{% block content %}
 
-		<table>
-			<tr>
-				<th>Client</th>
-				<td>{{ notification.client }}</td>
-			</tr>
-			<tr>
-				<th>Notification Type</th>
-				<td>{{ notification.ntype }}</td>
-			</tr>
-			<tr>
-				<th>Headline</th>
-				<td>{{ notification.headline }}</td>
-			</tr>
-			<tr>
-				<th>Ticket</th>
-				<td>{{ notification.ticket }}</td>
-			</tr>
-			<tr>
-				<th>Requester</th>
-				<td>{{ notification.requester }}</td>
-			</tr>
-			<tr>
-				<th>Date and Time Raised</th>
-				<td>{{ notification.raised }}</td>
-			</tr>
+{{ form.non_field_errors }}
+<h1>{{ notification.client }}</h1>
+
+<table>
+	<tr>
+		<th>Client</th>
+		<td>{{ notification.client }}</td>
+	</tr>
+	<tr>
+		<th>Notification Type</th>
+		<td>{{ notification.ntype }}</td>
+	</tr>
+	<tr>
+		<th>Headline</th>
+		<td>{{ notification.headline }}</td>
+	</tr>
+	<tr>
+		<th>Ticket</th>
+		<td>{{ notification.ticket }}</td>
+	</tr>
+	<tr>
+		<th>Requester</th>
+		<td>{{ notification.requester }}</td>
+	</tr>
+	<tr>
+		<th>Date and Time Raised</th>
+		<td>{{ notification.raised }}</td>
+	</tr>
 
 
 
-		</table>
+</table>
 
-		{% if updates.count > 0 %}
+{% if updates.count > 0 %}
 
-		<table>
-			<tr>
-				<th>Update</th>
-				<th>Updated At</th>
-				<th>Next Update At</th>
-				<th>Content</th>
-			</tr>
-			{% for update in updates %}
-			<tr>
-				<td>{{ update.update_number }}</td>
-				<td>{{ update.updated_at }}</td>
-				<td>{{ update.next_update_at }}</td>
-				<td>{{ update.content }}</td>
-			</tr>
-			{% endfor %}
-		</table>
+<table>
+	<tr>
+		<th>Update</th>
+		<th>Updated At</th>
+		<th>Next Update At</th>
+		<th>Content</th>
+	</tr>
+	{% for update in updates %}
+	<tr>
+		<td>{{ update.update_number }}</td>
+		<td>{{ update.updated_at }}</td>
+		<td>{{ update.next_update_at }}</td>
+		<td>{{ update.content }}</td>
+	</tr>
+	{% endfor %}
+</table>
 
-		{% else %}
+{% else %}
 
-		<p>No Updates to display</p>
-		<p>Would you like to <a href="/notification/{{ notification.id }}/new/">create</a> one ?</p>
+<p>No Updates to display</p>
+<p>Would you like to <a href="/notification/{{ notification.id }}/new/">create</a> one ?</p>
 
-		{% endif %}
+{% endif %}
 
-		<table>
-			<tr>
-				<td>
-					<form action="/notification/all/">
-						<input type="submit" value="Back">
-					</form>
-				</td>
-				<td>
-					<form action="/notification/{{ notification.id }}/add/">
-						<input type="submit" value="Add Update" />
-					</form>
-				</td>
-			</tr>
-		</table>
+<table>
+	<tr>
+		<td>
+			<form action="/notification/all/">
+				<input type="submit" value="Back">
+			</form>
+		</td>
+		<td>
+			<form action="/notification/{{ notification.id }}/add/">
+				<input type="submit" value="Add Update" />
+			</form>
+		</td>
+		<td>
+			<form action="/notification/{{ notification.id }}/preview/">
+				<input type="submit" value="Preview Notification" />
+			</form>
+		</td>
+	</tr>
+</table>
 
-
-
-	</body>
-</html>
+{% endblock content %}
