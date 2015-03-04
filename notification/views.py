@@ -1,5 +1,7 @@
 from datetime import timedelta
 
+from django.template.loader import get_template
+from django.template import Context
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponseRedirect
 from django.utils import timezone
@@ -120,3 +122,16 @@ def add_update(request, notification_id):
 def preview_email(request):
     client = request.GET.get('client', '')
     return render(request, 'notification/preview_email.html', {'client': client})
+
+
+def preview_notification(request, notification_id):
+    email_template = get_template('notification/notification_email.html')
+    email_subject = "Client - Notification Type - Ticket - Headline - Update No."
+    email_html = email_template.render(Context({
+        'notification': Notification.objects.get(id=notification_id),
+        'updates': Update.objects.filter(notification__id=notification_id).order_by('-update_number')
+    }))
+    return render(
+        request,
+        'notification/notification_preview.html',
+        {'notification': Notification.objects.get(id=notification_id), 'email_html': email_html, })

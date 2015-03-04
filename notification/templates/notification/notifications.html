@@ -29,10 +29,23 @@
 {% else %}
 No notifications to display.
 {% endif %}
+
 <p>
-<a href="/">Back to SD Tools</a>
+<table>
+	<tr>
+		<td>
+			<form action="/">
+				<input type="submit" value="Back to SD Tools">
+			</form>
+		</td>
+		<td>
+			<form action="/notification/new/">
+				<input type="submit" value="New Notification" />
+			</form>
+		</td>
+	</tr>
+</table>
+
 </p>
-<p>
-<a href="/notification/new/">New Notification</a>
-</p>
+
 {% endblock content %}
