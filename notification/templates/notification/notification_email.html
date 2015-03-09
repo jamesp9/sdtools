@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Client - Notification Type - Ticket - Headline - Update No.{% endblock title %}
+
+{% block content %}
+
+<p>
+From:
+</p>
+<p>
+To:
+</p>
+<p>
+Cc:
+</p>
+<p>
+Subject:
+</p>
+<table style="border-collapse: collapse; width: 800px">
+	<tr>
+		<td style="background-color: {{ notification.ntype.colour }}; color: white; text-align: center;" colspan="2"><h1>{{ notification.client }}</h1></td>
+	</tr>
+	<tr>
+		<td style="background-color: {{ notification.ntype.colour }}; color: white; text-align: center;" colspan="2">
+			<h2>{{ notification.ntype.notification_type }} Notification</h2>
+		</td>
+	</tr>
+	<tr>
+		<td style="background-color: {{ notification.ntype.colour }}; width: 250px"><strong>Headline</strong></td>
+		<td>{{ notification.headline }}</td>
+	</tr>
+	<tr>
+		<td style="background-color: {{ notification.ntype.colour }};"><strong>Ticket</strong></td>
+		<td>{{ notification.ticket }}</td>
+	</tr>
+	<tr>
+		<td style="background-color: {{ notification.ntype.colour }};"><strong>Date and Time Raised</strong></td>
+		<td>{{ notification.raised }}</td>
+	</tr>
+	<tr>
+		<td style="background-color: {{ notification.ntype.colour }};"><strong>Requester</strong></td>
+		<td>{{ notification.requester }}</td>
+	</tr>
+	<tr>
+		<td style="background-color: {{ notification.ntype.colour }};" colspan="2"><em>Updates in reverse chronological order.</em></td>
+	</tr>
+	{% for update in updates %}
+		<tr>
+	{% if update.update_number == updates.count %}
+			<td style="background-color: white" colspan="2">
+				{% else %}
+			<td style="background-color: #C0C0C0" colspan="2">
+	{% endif %}
+
+				<strong>Update number:</strong> {{ update.update_number }} <br>
+				<strong>Time of Update:</strong> {{ update.updated_at }}<br>
+				<p>
+				{{ update.content }}
+				</p>
+				<strong>Next Update At:</strong> {{ update.next_update_at }}
+			</td>
+		</tr>
+	{% endfor %}
+</table>
+{% endblock content %}

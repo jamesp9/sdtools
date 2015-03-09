@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Notification Preview{% endblock title %}
+
+{% block content %}
+<h1>Notification Preview</h1>
+
+{{ email_html }}
+<p>
+<table>
+	<tr>
+		<td>
+			<form action="/notification/{{ notification.id }}">
+				<input type="submit" value="Back to Notification" />
+			</form>
+		</td>
+		<td>
+			<form action="/notification/send/">
+				<input type="submit" value="Send Notification" />
+			</form>
+		</td>
+	</tr>
+</table>
+</p>
+{% endblock content %}
