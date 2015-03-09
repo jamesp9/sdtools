@@ -8,6 +8,9 @@
 		{{ form.non_field_errors }}
 		<h1>Notification</h1>
 
+		<table>
+			<tr>
+                <td>
 		<form action="/notification/new/" method="POST">
 			{% csrf_token %}
 			<table>
@@ -15,5 +18,15 @@
 			</table>
 			<input type="submit" value="Submit" />
 		</form>
+        <td>
+        </tr>
+			<tr>
+				<td>
+				<form action="/notification/all">
+                    <button type="submit">Back</button>
+				</form>
+				</td>
+			</tr>
+		</table>
 	</body>
 </html>
