@@ -5,7 +5,7 @@ from django.utils import timezone
 class Email(models.Model):
     email = models.EmailField()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.email
 
 
@@ -16,7 +16,7 @@ class Client(models.Model):
         help_text="Use format: Country/City as used by pytz")
     emails = models.ManyToManyField(Email)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -24,7 +24,7 @@ class NotificationType(models.Model):
     notification_type = models.CharField(max_length=255)
     colour = models.CharField(max_length=255)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.notification_type
 
 
@@ -37,7 +37,7 @@ class Notification(models.Model):
     requester = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.headline
 
 
@@ -48,5 +48,5 @@ class Update(models.Model):
     next_update_at = models.DateTimeField(default=timezone.now)
     content = models.TextField(default="Put the update content here.")
 
-    def __unicode__(self):
+    def __str__(self):
         return str(self.update_number)

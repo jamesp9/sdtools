@@ -27,7 +27,6 @@ def edit_notification(request, notification_id):
     if request.method == 'POST':
         form = NotificationForm(request.POST)
         if form.is_valid():
-
             return HttpResponseRedirect('/notification/detail/')
     else:
         form = NotificationForm()
@@ -100,7 +99,8 @@ def add_update(request, notification_id):
     else:
         if number_of_updates > 0:
             # Prefill "updated at" with the "next update" time from previous Update
-            updated_at = Update.objects.filter(notification__id=notification_id).get(update_number=number_of_updates).next_update_at
+            updated_at = Update.objects.filter(notification__id=notification_id).get(
+                update_number=number_of_updates).next_update_at
         else:
             updated_at = timezone.now()
 
@@ -126,7 +126,7 @@ def preview_email(request):
 
 def preview_notification(request, notification_id):
     email_template = get_template('notification/notification_email.html')
-    email_subject = "Client - Notification Type - Ticket - Headline - Update No."
+    # email_subject = "Client - Notification Type - Ticket - Headline - Update No."
     email_html = email_template.render(Context({
         'notification': Notification.objects.get(id=notification_id),
         'updates': Update.objects.filter(notification__id=notification_id).order_by('-update_number')
