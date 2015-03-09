@@ -1,5 +1,4 @@
 # Service Desk Tools
-=======
 A project to create web based applications to assist in day to day service desk tasks.
 
 ## Apps available
