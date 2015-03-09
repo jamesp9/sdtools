@@ -1,6 +1,7 @@
-sdtools
+# Service Desk Tools
 =======
+A project to create web based applications to assist in day to day service desk tasks.
 
-Service Desk Tools
-
-A project to create tools to make service desk tasks easier.
+## Apps available
+### Notification
+Track and email notification communications to staff and/or clients.
