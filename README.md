@@ -1,6 +1,6 @@
 # Service Desk Tools
-A project to create web based applications to assist in day to day service desk tasks.
+A web application with tools to assist with service desk operations.
 
-## Apps available
-### Notification
-Track and email notification communications to staff and/or clients.
+# Apps
+## Notification
+Track and send email notifications.
